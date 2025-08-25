@@ -8,24 +8,45 @@
 <body>
   <h1>🎡 Ruleta de la Suerte</h1>
 
-  <div class="controls">
-    <label for="cantidad">Cantidad de números:</label>
-    <input type="number" id="cantidad" min="2" value="10">
-    <button id="generar">Generar Ruleta</button>
-    <button id="spinBtn" disabled>Girar</button>
-    <a href="ganadores.html" class="btn-ganadores">Ganadores ➝</a>
+  <div class="main-grid">
+  <!-- Columna 1: Imagen -->
+  <div class="column">
+    <img src="img/ChatGPT Image 6 ago 2025, 01_51_18 p.m..png" alt="Imagen" width="100%">
   </div>
 
-  <div class="ruleta-container">
-    <div class="flecha"></div>
-    <canvas id="ruleta" width="500" height="500"></canvas>
-  </div>
+  <!-- Columna 2: Ruleta + Talonario + Controles -->
+  <div class="column">
+    
 
-  <!-- Talonario -->
-  <div id="talonarioContainer">
-    <h2>📜 Talonario</h2>
+    <!-- Controles de la ruleta -->
+    <div class="controls">
+      <label for="cantidad">Cantidad de números:</label>
+      <input type="number" id="cantidad" min="2" value="10"><br><br>
+      <button id="generar">Generar Ruleta</button>
+      <button id="spinBtn" disabled>Girar</button>
+      <a href="ganadores.html" class="btn-ganadores">Ganadores ➝</a>
+    </div>
+
+    <div class="ruleta-container">
+      <div class="flecha"></div>
+      <canvas id="ruleta" width="500" height="500"></canvas>
+    </div>
+
+  <h2>📜 Talonario</h2>
+
     <div id="talonario" class="talonario"></div>
+    
   </div>
+
+  <!-- Columna 3: Formulario -->
+  <div class="column formulario">
+    <input type="text" placeholder="Nombre">
+    <input type="text" placeholder="Cédula">
+    <input type="text" placeholder="WhatsApp">
+    <button>Enviar</button>
+  </div>
+</div>
+
 
   <!-- Modal -->
   <div id="modal" class="modal">
