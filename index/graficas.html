@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Gráficas con D3.js</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
+    h1 {
+      margin: 20px;
+      color: #333;
+    }
+    #buttons {
+      margin: 10px;
+    }
+    button {
+      margin: 5px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      background: steelblue;
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover {
+      background: #4682b4;
+    }
+    svg {
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin: 20px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gráficas con D3.js</h1>
+  <div id="buttons">
+    <button onclick="dibujarBarras()">Barras</button>
+    <button onclick="dibujarLineas()">Líneas</button>
+    <button onclick="dibujarPastel()">Pastel</button>
+  </div>
+  <svg width="500" height="300"></svg>
+
+  <script>
+    const svg = d3.select("svg");
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+    const datos = [10, 40, 25, 60, 35, 70, 55];
+
+    // Función para limpiar el SVG antes de dibujar otra gráfica
+    function limpiar() {
+      svg.selectAll("*").remove();
+    }
+
+    // ======================
+    // GRÁFICO DE BARRAS
+    // ======================
+    function dibujarBarras() {
+      limpiar();
+      const x = d3.scaleBand()
+        .domain(d3.range(datos.length))
+        .range([0, width])
+        .padding(0.1);
+
+      const y = d3.scaleLinear()
+        .domain([0, d3.max(datos)])
+        .range([height, 0]);
+
+      svg.selectAll("rect")
+        .data(datos)
+        .enter()
+        .append("rect")
+        .attr("x", (d, i) => x(i))
+        .attr("y", d => y(d))
+        .attr("width", x.bandwidth())
+        .attr("height", d => height - y(d))
+        .attr("fill", "steelblue");
+    }
+
+    // ======================
+    // GRÁFICO DE LÍNEAS
+    // ======================
+    function dibujarLineas() {
+      limpiar();
+      const x = d3.scaleLinear().domain([0, datos.length-1]).range([0, width]);
+      const y = d3.scaleLinear().domain([0, d3.max(datos)]).range([height, 0]);
+
+      const line = d3.line()
+        .x((d,i) => x(i))
+        .y(d => y(d));
+
+      svg.append("path")
+        .datum(datos)
+        .attr("fill", "none")
+        .attr("stroke", "red")
+        .attr("stroke-width", 2)
+        .attr("d", line);
+    }
+
+    // ======================
+    // GRÁFICO DE PASTEL
+    // ======================
+    function dibujarPastel() {
+      limpiar();
+      const radius = Math.min(width, height) / 2;
+      const g = svg.append("g")
+        .attr("transform", `translate(${width/2},${height/2})`);
+
+      const pie = d3.pie();
+      const arc = d3.arc().innerRadius(0).outerRadius(radius);
+
+      const colores = d3.scaleOrdinal(d3.schemeCategory10);
+
+      g.selectAll("path")
+        .data(pie(datos))
+        .enter()
+        .append("path")
+        .attr("d", arc)
+        .attr("fill", (d, i) => colores(i));
+    }
+
+    // Mostrar por defecto el gráfico de barras
+    dibujarBarras();
+  </script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrusel de Ropa Responsivo</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .card img {
+      height: 250px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body class="bg-light">
+
+<div class="container my-5">
+  <h2 class="mb-4 text-center">Novedades en Ropa</h2>
+
+  <div id="ropaCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="row g-3">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+              <img src="https://via.placeholder.com/300x300?text=Camisa" class="card-img-top" alt="Camisa">
+              <div class="card-body text-center">
+                <h5 class="card-title">Camisa Casual</h5>
+                <p class="card-text">$25.00</p>
+                <button class="btn btn-primary">Comprar</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+              <img src="https://via.placeholder.com/300x300?text=Vestido" class="card-img-top" alt="Vestido">
+              <div class="card-body text-center">
+                <h5 class="card-title">Vestido Elegante</h5>
+                <p class="card-text">$45.00</p>
+                <button class="btn btn-primary">Comprar</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+              <img src="https://via.placeholder.com/300x300?text=Pantalón" class="card-img-top" alt="Pantalón">
+              <div class="card-body text-center">
+                <h5 class="card-title">Pantalón Jeans</h5>
+                <p class="card-text">$30.00</p>
+                <button class="btn btn-primary">Comprar</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+              <img src="https://via.placeholder.com/300x300?text=Chaqueta" class="card-img-top" alt="Chaqueta">
+              <div class="card-body text-center">
+                <h5 class="card-title">Chaqueta de Cuero</h5>
+                <p class="card-text">$80.00</p>
+                <button class="btn btn-primary">Comprar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="row g-3">
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+              <img src="https://via.placeholder.com/300x300?text=Sudadera" class="card-img-top" alt="Sudadera">
+              <div class="card-body text-center">
+                <h5 class="card-title">Sudadera Deportiva</h5>
+                <p class="card-text">$35.00</p>
+                <button class="btn btn-primary">Comprar</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+              <img src="https://via.placeholder.com/300x300?text=Short" class="card-img-top" alt="Short">
+              <div class="card-body text-center">
+                <h5 class="card-title">Short Verano</h5>
+                <p class="card-text">$20.00</p>
+                <button class="btn btn-primary">Comprar</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+              <img src="https://via.placeholder.com/300x300?text=Falda" class="card-img-top" alt="Falda">
+              <div class="card-body text-center">
+                <h5 class="card-title">Falda Floral</h5>
+                <p class="card-text">$28.00</p>
+                <button class="btn btn-primary">Comprar</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-3">
+            <div class="card">
+              <img src="https://via.placeholder.com/300x300?text=Abrigo" class="card-img-top" alt="Abrigo">
+              <div class="card-body text-center">
+                <h5 class="card-title">Abrigo Invierno</h5>
+                <p class="card-text">$95.00</p>
+                <button class="btn btn-primary">Comprar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Controles -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#ropaCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#ropaCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

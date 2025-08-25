@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Segmentación estilo Power BI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    .card {
+      width: 200px;
+      padding: 20px;
+      margin-top: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: steelblue;
+    }
+  </style>
+</head>
+<body>
+  <h2>Ventas por Región</h2>
+
+  <!-- Segmentador -->
+  <label for="region">Selecciona una región:</label>
+  <select id="region">
+    <option value="todas">Todas</option>
+    <option value="Norte">Norte</option>
+    <option value="Sur">Sur</option>
+    <option value="Este">Este</option>
+    <option value="Oeste">Oeste</option>
+  </select>
+
+  <!-- Tarjeta de resultado -->
+  <div class="card">
+    <div class="card-title">Total Ventas</div>
+    <div class="card-value" id="total">0</div>
+  </div>
+
+  <script>
+    // Datos simulados (como en Power BI)
+    const datos = [
+      { region: "Norte", ventas: 5000 },
+      { region: "Sur", ventas: 3000 },
+      { region: "Este", ventas: 4000 },
+      { region: "Oeste", ventas: 2000 }
+    ];
+
+    const totalEl = document.getElementById("total");
+    const select = document.getElementById("region");
+
+    // Función para actualizar el total
+    function actualizar() {
+      const region = select.value;
+      let total = 0;
+
+      if(region === "todas") {
+        total = datos.reduce((acc, d) => acc + d.ventas, 0);
+      } else {
+        total = datos.filter(d => d.region === region)
+                     .reduce((acc, d) => acc + d.ventas, 0);
+      }
+
+      totalEl.textContent = total;
+    }
+
+    // Evento: cuando el usuario cambia la región
+    select.addEventListener("change", actualizar);
+
+    // Mostrar valor inicial
+    actualizar();
+  </script>
+</body>
+</html>

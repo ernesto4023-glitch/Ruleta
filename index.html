@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ruleta de la Suerte</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🎡 Ruleta de la Suerte</h1>
+
+  <div class="controls">
+    <label for="cantidad">Cantidad de números:</label>
+    <input type="number" id="cantidad" min="2" value="10">
+    <button id="generar">Generar Ruleta</button>
+    <button id="spinBtn" disabled>Girar</button>
+    <a href="ganadores.html" class="btn-ganadores">Ganadores ➝</a>
+  </div>
+
+  <div class="ruleta-container">
+    <div class="flecha"></div>
+    <canvas id="ruleta" width="500" height="500"></canvas>
+  </div>
+
+  <!-- Talonario -->
+  <div id="talonarioContainer">
+    <h2>📜 Talonario</h2>
+    <div id="talonario" class="talonario"></div>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2 id="winnerName"></h2>
+      <button id="cerrarBtn">Cerrar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

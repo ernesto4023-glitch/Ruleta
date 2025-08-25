@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tarjetas estilo Power BI</title>
+  <style>
+    body {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
+    .card {
+      width: 180px;
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card-title {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 8px;
+    }
+    .card-value {
+      font-size: 26px;
+      font-weight: bold;
+      color: steelblue;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="card-title">Ventas Totales</div>
+    <div class="card-value" id="ventas">0</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Clientes</div>
+    <div class="card-value" id="clientes">0</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Promedio Tickets</div>
+    <div class="card-value" id="promedio">0</div>
+  </div>
+
+  <script>
+    // Simulación de datos (como si vinieran de DAX o de un backend)
+    const datos = {
+      ventas: 12500,
+      clientes: 340,
+      promedio: 36.8
+    };
+
+    // Mostrar valores en las tarjetas
+    document.getElementById("ventas").textContent = datos.ventas;
+    document.getElementById("clientes").textContent = datos.clientes;
+    document.getElementById("promedio").textContent = datos.promedio;
+  </script>
+
+</body>
+</html>

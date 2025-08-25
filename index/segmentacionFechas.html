@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard con Segmentación</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f4f4f4;
+    }
+    h2 {
+      text-align: center;
+    }
+    #controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    select {
+      padding: 5px;
+      font-size: 14px;
+    }
+    .dashboard {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .card {
+      width: 180px;
+      height: 120px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .card-title {
+      font-size: 14px;
+      color: #555;
+    }
+    .card-value {
+      font-size: 24px;
+      font-weight: bold;
+      color: steelblue;
+    }
+    svg {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Dashboard de Ventas</h2>
+
+  <!-- Segmentador -->
+  <div id="controls">
+    <label for="filtro">Segmentar por: </label>
+    <select id="filtro">
+      <option value="anio">Año</option>
+      <option value="mes">Mes</option>
+      <option value="dia">Día</option>
+    </select>
+  </div>
+
+  <!-- Tarjetas -->
+  <div class="dashboard">
+    <div class="card">
+      <div class="card-title">Ventas Totales</div>
+      <div class="card-value" id="ventas">0</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Promedio Ventas</div>
+      <div class="card-value" id="promedio">0</div>
+    </div>
+  </div>
+
+  <!-- Gráfico -->
+  <svg width="600" height="300"></svg>
+
+  <script>
+    const datos = [
+      { fecha: "2025-01-01", ventas: 100 },
+      { fecha: "2025-01-02", ventas: 150 },
+      { fecha: "2025-02-01", ventas: 200 },
+      { fecha: "2025-02-05", ventas: 250 },
+      { fecha: "2025-03-01", ventas: 300 },
+      { fecha: "2025-03-02", ventas: 180 },
+      { fecha: "2026-01-01", ventas: 400 },
+      { fecha: "2026-02-01", ventas: 500 }
+    ];
+
+    const svg = d3.select("svg");
+    const width = +svg.attr("width");
+    const height = +svg.attr("height");
+    const filtroSelect = document.getElementById("filtro");
+
+    function actualizar() {
+      const modo = filtroSelect.value;
+
+      // Agrupar según día, mes o año
+      let agrupado = {};
+      datos.forEach(d => {
+        const fecha = new Date(d.fecha);
+        let clave;
+        if(modo === "anio") clave = fecha.getFullYear();
+        if(modo === "mes") clave = fecha.getFullYear() + "-" + (fecha.getMonth()+1);
+        if(modo === "dia") clave = d.fecha;
+
+        if(!agrupado[clave]) agrupado[clave] = 0;
+        agrupado[clave] += d.ventas;
+      });
+
+      const datosAgrupados = Object.entries(agrupado).map(([k,v]) => ({clave:k, ventas:v}));
+
+      // Calcular métricas
+      const total = datosAgrupados.reduce((acc,d) => acc+d.ventas, 0);
+      const promedio = (total / datosAgrupados.length).toFixed(2);
+
+      document.getElementById("ventas").textContent = total;
+      document.getElementById("promedio").textContent = promedio;
+
+      // Limpiar gráfico
+      svg.selectAll("*").remove();
+
+      // Escalas
+      const x = d3.scaleBand()
+        .domain(datosAgrupados.map(d => d.clave))
+        .range([40, width-20])
+        .padding(0.1);
+
+      const y = d3.scaleLinear()
+        .domain([0, d3.max(datosAgrupados, d => d.ventas)])
+        .range([height-30, 20]);
+
+      // Ejes
+      svg.append("g")
+        .attr("transform", `translate(0,${height-30})`)
+        .call(d3.axisBottom(x));
+
+      svg.append("g")
+        .attr("transform", `translate(40,0)`)
+        .call(d3.axisLeft(y));
+
+      // Barras
+      svg.selectAll("rect")
+        .data(datosAgrupados)
+        .enter()
+        .append("rect")
+        .attr("x", d => x(d.clave))
+        .attr("y", d => y(d.ventas))
+        .attr("width", x.bandwidth())
+        .attr("height", d => (height-30) - y(d.ventas))
+        .attr("fill", "steelblue");
+    }
+
+    filtroSelect.addEventListener("change", actualizar);
+
+    // Mostrar inicialmente agrupado por Año
+    actualizar();
+  </script>
+</body>
+</html>

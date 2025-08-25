@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ganadores</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🏆 Números Ganadores</h1>
+
+  <!-- Lista de ganadores -->
+  <div id="listaGanadores" class="lista"></div>
+
+  <!-- Botón volver -->
+  <a href="index.html" class="btn-ganadores">⬅ Volver</a>
+
+  <!-- Botón vaciar lista -->
+  <button id="vaciarLista" class="btn-vaciar">🗑️ Vaciar lista de ganadores</button>
+
+  <script>
+    const lista = document.getElementById("listaGanadores");
+    const vaciarBtn = document.getElementById("vaciarLista");
+
+    function mostrarGanadores() {
+      let ganadores = JSON.parse(localStorage.getItem("ganadores")) || [];
+
+      if (ganadores.length === 0) {
+        lista.innerHTML = "<p>No hay ganadores todavía.</p>";
+      } else {
+        lista.innerHTML = "<ul>" + ganadores.map(g => 
+          `<li>🎉 Número: <strong>${g.numero}</strong> | 📅 ${g.fecha}</li>`
+        ).join("") + "</ul>";
+      }
+    }
+
+    // Vaciar lista de ganadores
+    vaciarBtn.addEventListener("click", () => {
+      if (confirm("⚠️ ¿Seguro que quieres vaciar la lista de ganadores?")) {
+        localStorage.removeItem("ganadores");
+        mostrarGanadores();
+        alert("✅ Lista de ganadores vaciada.");
+      }
+    });
+
+    // Mostrar lista al cargar
+    mostrarGanadores();
+  </script>
+</body>
+</html>
