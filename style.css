@@ -37,7 +37,7 @@ body {
 
 canvas {
   width: 100%;
-  max-width: 500px;
+  max-width: 700px;
   border-radius: 50%;
   box-shadow: 0 0 25px rgba(0,0,0,0.5);
 }
@@ -146,18 +146,19 @@ button:hover, .btn-ganadores:hover {
 }
 
 #cantidad{
-    width: 40px;
+    width: 70px;
 }
 
 /* ===== Responsive: apilar columnas en móvil ===== */
 @media screen and (max-width: 1024px) {
   .main-grid {
     grid-template-columns: 1fr !important; /* apilar columnas */
-    width: 95%;
+    width: 100%;
     gap: 20px;
   }
   .main-grid img{
-    width: 250px;
+    width: 400px;
+    margin-bottom: 50px;
   }
 
   .column {
@@ -168,8 +169,21 @@ button:hover, .btn-ganadores:hover {
   .ruleta-container,
   .talonario,
   .formulario,
-  .controls {
-    width: 95% !important;
+  .controls
+   {
+    width: 93% !important;
+    font-size: 35px;
+    margin-top: 50px;
+  }
+  button{
+    width: 33%;
+    font-size: 35px;
+    white-space: nowrap;
+  }
+
+  input{
+    width: 45%;
+    font-size: 35px;
   }
 
 }
