@@ -10,7 +10,7 @@ const closeModal = document.getElementById("closeModal");
 const cerrarBtn = document.getElementById("cerrarBtn");
 const vaciarListaBtn = document.getElementById("vaciarLista");
 
-let cantidadTickets = 0;
+let cantidadTickets = 1;
 let currentAngle = 0;
 let colors = [];
 
@@ -39,8 +39,8 @@ function drawWheel() {
     ctx.rotate(startAngle + anglePerSlice / 2);
     ctx.textAlign = "right";
     ctx.fillStyle = "black";
-    ctx.font = "bold 16px Arial";
-    ctx.fillText(i, 230, 10);
+    ctx.font = "bold 16px poppins";
+    ctx.fillText(i + 1, 230, 10);
     ctx.restore();
   }
 
@@ -67,7 +67,7 @@ function generarTalonario() {
   for (let i = 0; i < cantidadTickets; i++) {
     const numDiv = document.createElement("div");
     numDiv.classList.add("ticket");
-    numDiv.textContent = i;
+    numDiv.textContent = i + 1;
     talonarioDiv.appendChild(numDiv);
   }
 }
@@ -76,7 +76,7 @@ function generarTalonario() {
 function generarRuleta() {
   cantidadTickets = parseInt(cantidadInput.value);
   colors = Array.from({ length: cantidadTickets }, () => randomColor());
-  currentAngle = 0;
+  currentAngle = 1;
   drawWheel();
   generarTalonario(); // 🔥 también se genera el talonario
   spinBtn.disabled = false;
@@ -92,7 +92,7 @@ function spinWheel() {
   function animate(timestamp) {
     if (!start) start = timestamp;
     let progress = timestamp - start;
-    let angle = easeOut(progress, 0, spinAngle, duration);
+    let angle = easeOut(progress, 1, spinAngle, duration);
 
     currentAngle = angle * Math.PI / 180;
     drawWheel();
