@@ -145,3 +145,10 @@ cerrarBtn.addEventListener("click", () => { modal.style.display = "none"; });
 
 // Generar ruleta por defecto
 window.onload = generarRuleta;
+
+const sidebar = document.querySelector('.sidebar');
+const hamburger = document.querySelector('.hamburger');
+
+hamburger.addEventListener('click', () => {
+  sidebar.classList.toggle('active');
+});
